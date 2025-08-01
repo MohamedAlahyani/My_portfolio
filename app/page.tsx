@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { ArrowRight, Github, Linkedin, Mail, InstagramIcon } from "lucide-react"
+import { SiLeetcode } from "react-icons/si";
 
 import { Button } from "@/components/ui/button"
 import { ProjectCard } from "@/components/project-card"
@@ -12,13 +13,36 @@ import { MouseFollower } from "@/components/mouse-follower"
 import { ScrollProgress } from "@/components/scroll-progress"
 import { SectionHeading } from "@/components/section-heading"
 import { GlassmorphicCard } from "@/components/glassmorphic-card"
+import { VersionButton } from "@/components/version"
+import { redirect } from 'next/navigation'
 
-export default function Portfolio() {
+// Import fetching functions
+import{
+  getAboutMeData,
+  getProjectsData,
+  getSkillsData,
+  getExperienceData,
+  getContactInfoData,
+  getHeroSectionData,
+}from "@/lib/data-service"
+
+
+export default async function Portfolio() {
+
+  const [aboutMe, projects, skills, experience, contactInfo, heroSection] = await Promise.all([
+    getAboutMeData(),
+    getProjectsData(),
+    getSkillsData(),
+    getExperienceData(),
+    getContactInfoData(),
+    getHeroSectionData(),
+  ])
   return (
     <div className="min-h-screen bg-gradient-to-b from-zinc-900 via-zinc-900 to-black text-white overflow-hidden">
       <MouseFollower />
       <ScrollProgress />
       <FloatingNav />
+      
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -30,37 +54,44 @@ export default function Portfolio() {
 
         <div className="container relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
-            <div className="inline-block">
+            <div className="inline-block w-full text-center md:text-left md:w-auto">
               <div className="relative px-3 py-1 text-sm font-medium rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-4">
-                <span className="relative z-10">Software Engineer & Creative Developer</span>
+                <span className="relative z-10">Computer Scientist & Creative Developer</span>
                 <span className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 animate-pulse"></span>
               </div>
             </div>
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
               <span className="block">Hi, I'm</span>
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
-                Shine Kyaw Kyaw Aung
+                Mohamed Alahyani
               </span>
             </h1>
             <p className="text-xl text-zinc-400 max-w-[600px]">
-              I craft exceptional digital experiences with code, creativity, and a passion for innovation.
+              I am passionate about my work and create quality digital experiences using code and creativity.
             </p>
-            <div className="flex flex-wrap gap-4 pt-4">
+            <div className="flex flex-wrap gap-4 pt-4 justify-center md:justify-start">
+            <Link href="#projects">
               <Button className="relative overflow-hidden group bg-gradient-to-r from-purple-500 to-pink-500 border-0">
                 <span className="relative z-10 flex items-center">
-                  View Projects <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  View Projects
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </span>
                 <span className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>
               </Button>
-              <Button
+            </Link>
+            <Link href="#contact">             
+             <Button
                 variant="outline"
                 className="border-zinc-700 hover:text-purple-400 hover:border-purple-500 text-black hover:bg-purple-500/10"
               >
                 Contact Me
               </Button>
+              </Link>
+        
+
             </div>
-            <div className="flex gap-4 pt-4">
-              <Link href="https://github.com" target="_blank" rel="noopener noreferrer">
+            <div className="flex gap-4 pt-4 justify-center md:justify-start">
+              <Link href="https://github.com/MohamedAlahyani" target="_blank" rel="noopener noreferrer">
                 <Button
                   variant="ghost"
                   size="icon"
@@ -70,7 +101,7 @@ export default function Portfolio() {
                   <span className="sr-only">GitHub</span>
                 </Button>
               </Link>
-              <Link href="https://www.linkedin.com/in/shinekyawkyawaung/" target="_blank" rel="noopener noreferrer">
+              <Link href="https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile" target="_blank" rel="noopener noreferrer">
                 <Button
                   variant="ghost"
                   size="icon"
@@ -80,17 +111,17 @@ export default function Portfolio() {
                   <span className="sr-only">LinkedIn</span>
                 </Button>
               </Link>
-              <Link href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+              <Link href="https://www.instagram.com/cso__alhiyani?igsh=MWx6OXVyYjd4eDA3Ng%3D%3D&utm_source=qr " target="_blank" rel="noopener noreferrer">
                 <Button
                   variant="ghost"
                   size="icon"
                   className="rounded-full bg-zinc-800/50 hover:bg-zinc-800 text-zinc-400 hover:text-white"
                 >
                   <InstagramIcon className="h-5 w-5" />
-                  <span className="sr-only">Twitter</span>
+                  <span className="sr-only">Instagram</span>
                 </Button>
               </Link>
-              <Link href="mailto:hello@example.com">
+              <a href="mailto:mohamedalahiyani@gmail.com">
                 <Button
                   variant="ghost"
                   size="icon"
@@ -99,7 +130,8 @@ export default function Portfolio() {
                   <Mail className="h-5 w-5" />
                   <span className="sr-only">Email</span>
                 </Button>
-              </Link>
+              </a>
+
             </div>
           </div>
           <div className="flex justify-center">
@@ -129,8 +161,8 @@ export default function Portfolio() {
               <div className="absolute -inset-4 rounded-xl bg-gradient-to-r from-purple-500/20 to-pink-500/20 blur-xl opacity-70"></div>
               <div className="relative aspect-square rounded-xl overflow-hidden border border-zinc-800">
                 <img
-                  src="/placeholder.svg?height=600&width=600"
-                  alt="Shine Kyaw Kyaw Aung"
+                  src="/Alahyani.png?height=600&width=600"
+                  alt="Mohamed Alahyani"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
@@ -146,13 +178,12 @@ export default function Portfolio() {
             <div className="space-y-6">
               <GlassmorphicCard>
                 <p className="text-lg text-zinc-300">
-                  I'm a passionate software engineer with experience building web applications and digital products. I
-                  specialize in frontend development with React and Next.js, but I'm also comfortable working with
-                  backend technologies.
+                As a passionate Computer Scientist, I have experience in creating web applications and digital products. 
+                My expertise lies in front-end development, though I am also skilled in back-end technologies.
                 </p>
                 <p className="text-lg text-zinc-300 mt-4">
-                  My journey in tech started with a strong foundation in software development. I've worked with various
-                  companies to create intuitive, performant, and accessible digital experiences.
+                  My journey in tech began even before I started university, sparked by a strong interest in software development.
+                  Now, as a Computer Science student, I've had the opportunity to work on various projects to create intuitive, high-performing, and accessible digital experiences.
                 </p>
                 <p className="text-lg text-zinc-300 mt-4">
                   When I'm not coding, you can find me exploring new technologies, contributing to open-source projects,
@@ -162,15 +193,15 @@ export default function Portfolio() {
                 <div className="grid grid-cols-2 gap-4 mt-8">
                   <div className="space-y-1">
                     <div className="text-sm text-zinc-500">Name</div>
-                    <div className="font-medium">Shine Kyaw Kyaw Aung</div>
+                    <div className="font-medium">Mohamed Alahyani</div>
                   </div>
                   <div className="space-y-1">
                     <div className="text-sm text-zinc-500">Email</div>
-                    <div className="font-medium">hello@example.com</div>
+                    <div className="font-medium text-sm md:text-base break-all">mohamedalahiyani@gmail.com</div>
                   </div>
                   <div className="space-y-1">
                     <div className="text-sm text-zinc-500">Location</div>
-                    <div className="font-medium">Myanmar</div>
+                    <div className="font-medium">Ifrane</div>
                   </div>
                   <div className="space-y-1">
                     <div className="text-sm text-zinc-500">Availability</div>
@@ -199,16 +230,15 @@ export default function Portfolio() {
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-16">
             <SkillBadge name="JavaScript" level={90} />
-            <SkillBadge name="TypeScript" level={85} />
+            <SkillBadge name="Python" level={95} />
             <SkillBadge name="React" level={95} />
-            <SkillBadge name="Next.js" level={90} />
+            <SkillBadge name="Next.js" level={80} />
             <SkillBadge name="Node.js" level={80} />
             <SkillBadge name="HTML/CSS" level={95} />
             <SkillBadge name="Tailwind CSS" level={90} />
-            <SkillBadge name="GraphQL" level={75} />
-            <SkillBadge name="PostgreSQL" level={70} />
-            <SkillBadge name="AWS" level={65} />
-            <SkillBadge name="Docker" level={60} />
+            <SkillBadge name="C" level={85} />
+            <SkillBadge name="Mongodb" level={70} />
+            <SkillBadge name="Java" level={65} />
             <SkillBadge name="Git" level={85} />
           </div>
         </div>
@@ -226,52 +256,52 @@ export default function Portfolio() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
             <ProjectCard
-              title="E-commerce Platform"
-              description="A full-stack e-commerce platform built with Next.js, Stripe, and Prisma."
-              tags={["Next.js", "TypeScript", "Prisma", "Stripe"]}
-              image="/placeholder.svg?height=400&width=600"
-              demoUrl="https://example.com"
-              repoUrl="https://github.com"
+              title="Club-website"
+              description="A digital platform designed to promote the activities, events, and mission of our university’s Humanitarian Club."
+              tags={["Next.js", "Tailwind CSS"]}
+              image="/club.png?height=400&width=600"
+              demoUrl=""//To do later
+              repoUrl=""//To do later
             />
             <ProjectCard
               title="Task Management App"
               description="A collaborative task management application with real-time updates."
-              tags={["React", "Firebase", "Tailwind CSS", "Redux"]}
-              image="/placeholder.svg?height=400&width=600"
-              demoUrl="https://example.com"
-              repoUrl="https://github.com"
+              tags={["React", "Tailwind CSS","Node.js"]}
+              image="/Task management.jpeg?height=400&width=600"
+              demoUrl=""//To add later
+              repoUrl=""//To add later
             />
             <ProjectCard
               title="AI Content Generator"
               description="An AI-powered content generation tool using OpenAI's GPT models."
               tags={["Next.js", "OpenAI API", "Node.js", "MongoDB"]}
-              image="/placeholder.svg?height=400&width=600"
-              demoUrl="https://example.com"
-              repoUrl="https://github.com"
+              image="/Ai.jpeg?height=400&width=600"
+              demoUrl=""//To do later
+              repoUrl=""//To do later
             />
             <ProjectCard
               title="Fitness Tracker"
               description="A mobile-first fitness tracking application with data visualization."
-              tags={["React Native", "TypeScript", "D3.js", "Firebase"]}
-              image="/placeholder.svg?height=400&width=600"
-              demoUrl="https://example.com"
-              repoUrl="https://github.com"
+              tags={["React Native", "TypeScript", "Node.js", "Mongodb"]}
+              image="/fitness.jpeg?height=200&width=600"
+              demoUrl=""//To do later
+              repoUrl=""//To do later
             />
             <ProjectCard
               title="Weather Dashboard"
               description="A beautiful weather dashboard with forecasts and historical data."
-              tags={["React", "Weather API", "Chart.js", "Styled Components"]}
-              image="/placeholder.svg?height=400&width=600"
-              demoUrl="https://example.com"
-              repoUrl="https://github.com"
+              tags={["React", "Weather API", "Node.js"]}
+              image="/Weather.jpeg?height=400&width=600"
+              demoUrl=""//To do later
+              repoUrl=""//To do later
             />
             <ProjectCard
               title="Portfolio Website"
               description="This portfolio website built with Next.js and Tailwind CSS."
-              tags={["Next.js", "Tailwind CSS", "Framer Motion", "TypeScript"]}
+              tags={["Next.js", "Tailwind CSS"]}
               image="/placeholder.svg?height=400&width=600"
-              demoUrl="https://example.com"
-              repoUrl="https://github.com"
+              demoUrl=""//To do later
+              repoUrl=""//To do later
             />
           </div>
         </div>
@@ -285,7 +315,7 @@ export default function Portfolio() {
         </div>
 
         <div className="container relative z-10">
-          <SectionHeading title="Work Experience" subtitle="My professional journey" />
+          <SectionHeading title="Education" subtitle="My professional journey" />
 
           <div className="mt-16">
             <Timeline />
@@ -313,7 +343,7 @@ export default function Portfolio() {
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="text-xs md:text-sm text-zinc-500">Email</div>
-                    <div className="font-medium text-sm md:text-base break-all">hello@example.com</div>
+                    <div className="font-medium text-sm md:text-base break-all">mohamedalahiyani@gmail.com</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -322,7 +352,7 @@ export default function Portfolio() {
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="text-xs md:text-sm text-zinc-500">LinkedIn</div>
-                    <div className="font-medium text-sm md:text-base break-all">linkedin.com/in/shinekyawkyawaung</div>
+                    <div className="font-medium text-sm md:text-base break-all">linkedin.com/in/mohamedalahiyani</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -331,7 +361,7 @@ export default function Portfolio() {
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="text-xs md:text-sm text-zinc-500">GitHub</div>
-                    <div className="font-medium text-sm md:text-base break-all">github.com/shinekyawkyawaung</div>
+                    <div className="font-medium text-sm md:text-base break-all">github.com/MohamedAlahyani</div>
                   </div>
                 </div>
               </div>
@@ -355,15 +385,15 @@ export default function Portfolio() {
         <div className="container flex flex-col md:flex-row justify-between items-center gap-6">
           <div>
             <Link href="/" className="font-bold text-xl">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">Shine</span>
-              <span className="text-white">KKA</span>
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">Mohamed</span>
+              <span className="text-white"> Alahyani</span>
             </Link>
-            <p className="text-sm text-zinc-500 mt-2">
-              © {new Date().getFullYear()} Shine Kyaw Kyaw Aung. All rights reserved.
-            </p>
+          <div className="flex justify-center py-4">
+            <VersionButton />
+          </div>
           </div>
           <div className="flex gap-4">
-            <Link href="https://github.com" target="_blank" rel="noopener noreferrer">
+            <Link href="https://github.com/MohamedAlahyani" target="_blank" rel="noopener noreferrer">
               <Button
                 variant="ghost"
                 size="icon"
@@ -373,7 +403,7 @@ export default function Portfolio() {
                 <span className="sr-only">GitHub</span>
               </Button>
             </Link>
-            <Link href="https://www.linkedin.com/in/shinekyawkyawaung/" target="_blank" rel="noopener noreferrer">
+            <Link href="https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile" target="_blank" rel="noopener noreferrer">
               <Button
                 variant="ghost"
                 size="icon"
@@ -383,7 +413,7 @@ export default function Portfolio() {
                 <span className="sr-only">LinkedIn</span>
               </Button>
             </Link>
-            <Link href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+            <Link href="https://www.instagram.com/cso__alhiyani?igsh=MWx6OXVyYjd4eDA3Ng%3D%3D&utm_source=qr " target="_blank" rel="noopener noreferrer">
               <Button
                 variant="ghost"
                 size="icon"
@@ -393,7 +423,7 @@ export default function Portfolio() {
                 <span className="sr-only">Twitter</span>
               </Button>
             </Link>
-            <Link href="mailto:hello@example.com">
+            <Link href="mailto:mohamedalahiyani@gmail.com">
               <Button
                 variant="ghost"
                 size="icon"

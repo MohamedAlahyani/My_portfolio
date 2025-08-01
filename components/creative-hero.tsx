@@ -21,9 +21,9 @@ export function CreativeHero() {
         {/* Apple-style Avatar */}
         <div className="relative w-full h-full rounded-full overflow-hidden bg-gradient-to-br from-zinc-700/50 to-zinc-800/50 flex items-center justify-center">
           <img
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/my-avatar-0zxAXW7IyHYZM4TamVo5GKNxtEqBwj.png"
-            alt="Shine Kyaw Kyaw Aung Avatar"
-            className="w-full h-full object-cover scale-110"
+            src="/Image/my-avatar.png"
+            alt="Mohamed"
+            className="w-full h-full object-cover scale-10"
           />
         </div>
 

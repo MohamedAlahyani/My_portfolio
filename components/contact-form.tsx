@@ -2,7 +2,8 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useRef,useState } from "react"
+import emailjs from "@emailjs/browser"
 import { motion } from "framer-motion"
 import { Send } from "lucide-react"
 
@@ -12,24 +13,42 @@ import { Textarea } from "@/components/ui/textarea"
 import { useToast } from "@/hooks/use-toast"
 
 export function ContactForm() {
-  const { toast } = useToast()
-  const [isSubmitting, setIsSubmitting] = useState(false)
+const { toast } = useToast()
+const [isSubmitting, setIsSubmitting] = useState(false)
+const formRef = useRef<HTMLFormElement>(null)
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault()
+  setIsSubmitting(true)
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+  if (!formRef.current) return
 
-    toast({
-      title: "Message sent!",
-      description: "Thanks for reaching out. I'll get back to you soon.",
+  emailjs
+    .sendForm(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        formRef.current!,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+    )
+    .then(() => {
+      
+      toast({
+        title: "Message sent!",
+        description: "Thanks for reaching out. I'll get back to you soon.",
+      })
+      formRef.current?.reset()
     })
-
-    setIsSubmitting(false)
-    e.currentTarget.reset()
-  }
+    .catch((error) => {
+      toast({
+        title: "Error",
+        description: "Something went wrong. Please try again.",
+      })
+      console.error("EmailJS error:", error)
+    })
+    .finally(() => {
+      setIsSubmitting(false)
+    })
+}
 
   return (
     <motion.div
@@ -44,9 +63,10 @@ export function ContactForm() {
         <div className="relative">
           <h3 className="text-2xl font-bold mb-6">Send Me a Message</h3>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form  ref={formRef} onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
               <Input
+                name="user_name"
                 placeholder="Your Name"
                 required
                 className="bg-zinc-900/50 border-zinc-700 focus:border-purple-500 focus:ring-purple-500/20"
@@ -55,6 +75,7 @@ export function ContactForm() {
             <div className="space-y-2">
               <Input
                 type="email"
+                name="user_email"
                 placeholder="Your Email"
                 required
                 className="bg-zinc-900/50 border-zinc-700 focus:border-purple-500 focus:ring-purple-500/20"
@@ -62,6 +83,7 @@ export function ContactForm() {
             </div>
             <div className="space-y-2">
               <Input
+                name="Subject"
                 placeholder="Subject"
                 required
                 className="bg-zinc-900/50 border-zinc-700 focus:border-purple-500 focus:ring-purple-500/20"
@@ -69,6 +91,7 @@ export function ContactForm() {
             </div>
             <div className="space-y-2">
               <Textarea
+                name="message"
                 placeholder="Your Message"
                 rows={5}
                 required

@@ -45,9 +45,9 @@ export function ProjectCard({ title, description, tags, image, demoUrl, repoUrl 
             />
           </div>
 
-          <div className="p-6 flex-grow">
-            <h3 className="text-xl font-bold mb-2">{title}</h3>
-            <p className="text-zinc-400 mb-4">{description}</p>
+          <div className="p-6 flex-grow flex flex-col">
+            <h3 className="text-xl font-bold mb-2 line-clamp-2 min-h-[3.5rem]">{title}</h3>
+            <p className="text-zinc-400 mb-4 line-clamp-3 min-h-[4.5rem] flex-grow">{description}</p>
 
             <div className="flex flex-wrap gap-2 mb-6">
               {tags.map((tag, index) => (

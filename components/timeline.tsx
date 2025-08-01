@@ -5,31 +5,25 @@ import { useMobile } from "@/hooks/use-mobile"
 
 const experiences = [
   {
-    title: "Senior Frontend Engineer",
-    company: "Tech Innovations Inc.",
-    period: "2021 - Present",
+    title: "Bachelor of Science in Computer Science",
+    company: "Al Akhawayn University.",
+    period: "2023 - Present",
     description:
-      "Lead the frontend development team in building a SaaS platform. Implemented new features, improved performance, and mentored junior developers.",
+      "Studying core topics like programming, data structers, algorithms, and databases. Building strong technical skills through projects and hands-on learning.",
   },
   {
-    title: "Frontend Developer",
-    company: "Digital Solutions Co.",
-    period: "2019 - 2021",
+    title: "Minor in Business Administartion",
+    company: "Al AKhawayn University.",
+    period: "2023 - Present",
     description:
-      "Developed responsive web applications using React and TypeScript. Collaborated with designers and backend engineers to deliver high-quality products.",
+      "Learning the fundamentals of business, including management, marketing, finance, and entrepreneurship to complement my technical background",
   },
   {
-    title: "Web Developer",
-    company: "Creative Agency",
-    period: "2017 - 2019",
+    title: "Baccalaureat ",
+    company: "Groupe Scolaire Alexandre",
+    period: "2017 - 2023",
     description:
-      "Built websites and web applications for various clients. Worked with HTML, CSS, JavaScript, and WordPress.",
-  },
-  {
-    title: "Intern",
-    company: "Startup Hub",
-    period: "2016 - 2017",
-    description: "Assisted in developing web applications and learned modern web development practices.",
+      "Graduated with a specialization in Science (Physics)",
   },
 ]
 
