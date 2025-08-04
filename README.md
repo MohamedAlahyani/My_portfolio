@@ -1,30 +1,18 @@
-# Creative portfolio
+# 🌐 Mohamed Alahyani - Developer Portfolio
 
-*Automatically synced with your [v0.dev](https://v0.dev) deployments*
+Welcome to my personal portfolio website built with **Next.js** and **Tailwind CSS**. This project showcases my skills, experiences, and selected projects. It's designed to be fast, responsive, and easy to maintain.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/mohamedalahyanis-projects/v0-creative-portfolio)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.dev-black?style=for-the-badge)](https://v0.dev/chat/projects/R1rPTVl1gCC)
+## 🛠️ Tech Stack
 
-## Overview
+- **Framework:** [Next.js](https://nextjs.org/)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **Deployment:** [Vercel](https://vercel.com/)
+- **Version Control:** Git & GitHub
 
-This repository will stay in sync with your deployed chats on [v0.dev](https://v0.dev).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.dev](https://v0.dev).
+## 🚀 Features
 
-## Deployment
-
-Your project is live at:
-
-**[https://vercel.com/mohamedalahyanis-projects/v0-creative-portfolio](https://vercel.com/mohamedalahyanis-projects/v0-creative-portfolio)**
-
-## Build your app
-
-Continue building your app on:
-
-**[https://v0.dev/chat/projects/R1rPTVl1gCC](https://v0.dev/chat/projects/R1rPTVl1gCC)**
-
-## How It Works
-
-1. Create and modify your project using [v0.dev](https://v0.dev)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+- ✨ Modern and clean user interface
+- 📱 Fully responsive across all devices
+- ⚡ Fast page loads with optimized performance
+- 🧩 Easy to manage content: About Me, Projects, Skills, Experience, Contact
+- 🛠️ Dynamic routing and SEO support
